@@ -1,0 +1,66 @@
+.c-flashcard {
+  //   background-color: black;
+  height: 250px;
+  transition: all 1s ease-in-out;
+
+  &__front,
+  &__back {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(235, 235, 235);
+    border: 1px solid black;
+    min-width: 250px;
+    min-height: 200px;
+    border-radius: 0.5rem;
+    transition: all 0.5s ease-in-out;
+  }
+
+  &__front {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 1rem;
+    // align-items: flex-end;
+    &__question {
+      font-size: 1.5rem;
+      //   inline-size: 230px;
+      overflow-wrap: break-word;
+    }
+
+    &__options {
+      //   align-self: center;
+      display: flex;
+      flex-direction: column;
+
+      &__option {
+        margin: 0.5rem;
+        cursor: pointer;
+        display: inline-block;
+        border: none;
+        color: rgb(141, 141, 141);
+      }
+    }
+  }
+
+  &__back {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    &__answer {
+      font-size: 1.5rem;
+      //   inline-size: 230px;
+      overflow-wrap: break-word;
+    }
+    &__btn {
+      justify-self: flex-end;
+      align-self: flex-start;
+      margin: 0.5rem;
+      cursor: pointer;
+      display: inline-block;
+      border: none;
+      color: rgb(82, 82, 82);
+    }
+  }
+}
