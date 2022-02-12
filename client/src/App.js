@@ -42,10 +42,11 @@ function App() {
   return (
     <div className='App'>
       <header className='c-header'>
-        <h1>BlitzKarter</h1>
+        <h1 className='c-header__logo'>BlitzKarter</h1>
         <ul className='c-header__nav'>
-          <li className='c-header__nav__btn'>
+          <li>
             <button
+              className='c-header__nav__btn'
               onClick={() => {
                 setNewCardAnimate(!newCardAnimate);
               }}

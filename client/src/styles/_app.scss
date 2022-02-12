@@ -5,16 +5,22 @@
   align-items: center;
   height: 100vh;
   overflow: hidden;
-  background-color: #a0a4b8;
+  background-color: #363732;
+  font-family: 'Poppins', sans-serif;
   .c-header {
     display: flex;
-    justify-content: space-around;
-    background-color: #d8ddef;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: #66c3ff;
     align-items: center;
-    border: 1px solid black;
+    // border: 1px solid black;
+    border-radius: 1rem;
     border-top: none;
     width: 50%;
     height: 7vh;
+    &__logo {
+      font-size: 2rem;
+    }
     &__nav {
       display: flex;
       margin: 0;
@@ -24,15 +30,23 @@
       gap: 1rem;
       justify-content: center;
       align-items: center;
+
+      &__btn {
+        border: none;
+        background: none;
+      }
     }
   }
   .c-body {
+    margin-top: 0.5rem;
     display: flex;
     justify-content: center;
     // align-items: center;
+    background-color: #f0f0f0;
     width: 50%;
     height: 93vh;
-    border: 1px solid black;
+    border-radius: 1rem;
+    // border: 1px solid black;
     border-top: none;
   }
 }

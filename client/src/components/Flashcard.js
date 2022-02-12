@@ -1,8 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ReactCardFlip from 'react-card-flip';
 
 const Flashcard = ({ card }) => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [height, setHeight] = useState('initial');
+
+  const frontEl = useRef();
+  const backEl = useRef();
+
+  function setMaxHeight() {
+    const frontHeight = frontEl.current.getBoundingClientRect().height;
+    const backHeight = backEl.current.getBoundingClientRect().height;
+    setHeight(Math.max(frontHeight, backHeight, 100));
+  }
+
+  useEffect(setMaxHeight, [card.question, card.answer, card.options]);
+  useEffect(() => {
+    window.addEventListener('resize', setMaxHeight);
+    return () => window.removeEventListener('resize', setMaxHeight);
+  }, []);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -22,7 +38,7 @@ const Flashcard = ({ card }) => {
     <div className='c-flashcard'>
       {
         <ReactCardFlip isFlipped={isFlipped}>
-          <div className='c-flashcard__front'>
+          <div className='c-flashcard__front' ref={frontEl}>
             <h1 className='c-flashcard__front__question'>{card.question}</h1>
             <ul className='c-flashcard__front__options'>
               {card.options.map((option, index) => (
@@ -39,7 +55,7 @@ const Flashcard = ({ card }) => {
             </ul>
           </div>
 
-          <div className='c-flashcard__back'>
+          <div className='c-flashcard__back' ref={backEl}>
             <h1 className='c-flashcard__back__answer'>{card.answer}</h1>
             <button
               className='c-flashcard__back__btn'
