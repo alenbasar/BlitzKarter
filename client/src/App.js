@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import FlashcardList from './components/FlashcardList';
+import NewFlashcard from './components/NewFlashcard';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const FAKE_DATA = [
@@ -19,17 +20,16 @@ const FAKE_DATA = [
   },
 ];
 
-function App() {
+function App(props) {
   const [newCardAnimate, setNewCardAnimate] = useState(false);
-  const [cardData, setCardData] = useState(FAKE_DATA);
+  const [cardData, setCardData] = useState([]);
+  const [newFlashcard, setNewFlashcard] = useState();
 
   const getCardsData = async () => {
     try {
       const res = await fetch('http://localhost:8000/cards');
       const data = await res.json();
-      //   console.log(data.map((card, idx) => card.question));
       setCardData(data);
-      //   return JSON.stringify(data);
     } catch (error) {
       console.error(error);
     }
@@ -37,13 +37,21 @@ function App() {
 
   useEffect(() => {
     getCardsData();
-  }, []);
+  }, [newFlashcard]);
+
+  const isNewFlashcard = (newFlashcard) => {
+    setNewFlashcard(newFlashcard);
+    console.log(newFlashcard);
+  };
+  const Posted = (isPosted) => {
+    setNewFlashcard(false);
+  };
 
   return (
     <div className='App'>
       <header className='c-header'>
         <h1 className='c-header__logo'>BlitzKarter</h1>
-        <ul className='c-header__nav'>
+        {/* <ul className='c-header__nav'>
           <li>
             <button
               className='c-header__nav__btn'
@@ -54,10 +62,14 @@ function App() {
               {newCardAnimate ? 'My Cards' : 'Create New'}
             </button>
           </li>
-        </ul>
+        </ul> */}
       </header>
       <section className='c-body'>
-        <FlashcardList cardData={cardData} />
+        {newFlashcard ? (
+          <NewFlashcard isPosted={Posted} />
+        ) : (
+          <FlashcardList cardData={cardData} onAddNew={isNewFlashcard} />
+        )}
       </section>
     </div>
   );

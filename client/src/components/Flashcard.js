@@ -4,10 +4,11 @@ import axios from 'axios';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const Flashcard = ({ card }) => {
+const Flashcard = (props) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [height, setHeight] = useState('initial');
   const [animateExit, setAnimateExit] = useState(false);
+  const [addNew, setAddNew] = useState(true);
 
   // const frontEl = useRef();
   // const backEl = useRef();
@@ -28,7 +29,7 @@ const Flashcard = ({ card }) => {
     e.preventDefault();
     console.log(e.target.value);
 
-    if (e.target.value === card.answer) {
+    if (e.target.value === props.card.answer) {
       setIsFlipped(true);
     }
 
@@ -49,18 +50,24 @@ const Flashcard = ({ card }) => {
     }
   };
 
+  // useEffect(() => {
+  //   setAddNew(false);
+  // }, []);
+
   return (
     <div className='c-flashcard'>
-      {card !== '' ? (
+      {props.card !== '' ? (
         <ReactCardFlip isFlipped={isFlipped}>
           <div
             className={`c-flashcard__front animate__animated ${
               animateExit ? 'hidden' : ''
             }`}
           >
-            <h1 className='c-flashcard__front__question'>{card.question}</h1>
+            <h1 className='c-flashcard__front__question'>
+              {props.card.question}
+            </h1>
             <ul className='c-flashcard__front__options'>
-              {card.options.map((option, index) => (
+              {props.card.options.map((option, index) => (
                 <li key={index}>
                   <button
                     className='c-flashcard__front__options__option'
@@ -79,7 +86,7 @@ const Flashcard = ({ card }) => {
               animateExit ? 'hidden' : ''
             }`}
           >
-            <h1 className='c-flashcard__back__answer'>{card.answer}</h1>
+            <h1 className='c-flashcard__back__answer'>{props.card.answer}</h1>
             <div className='c-flashcard__back__options'>
               <button
                 className='c-flashcard__back__options__back-btn'
@@ -90,7 +97,7 @@ const Flashcard = ({ card }) => {
               <button
                 className='c-flashcard__back__options__delete-btn'
                 onClick={handleDeleteClick}
-                value={card._id}
+                value={props.card._id}
               >
                 Delete
               </button>
@@ -98,7 +105,13 @@ const Flashcard = ({ card }) => {
           </div>
         </ReactCardFlip>
       ) : (
-        <div className='c-flashcard__add-new'>
+        <div
+          className='c-flashcard__add-new'
+          onClick={() => {
+            setAddNew(!addNew);
+            props.onNewFlashcard(addNew);
+          }}
+        >
           <AddCircleOutlineRoundedIcon />
         </div>
       )}

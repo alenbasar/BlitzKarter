@@ -2,13 +2,21 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Flashcard from './Flashcard';
 import Grid from '@mui/material/Grid';
 
-const FlashcardList = ({ cardData }) => {
+const FlashcardList = (props) => {
+  const newFlashcard = (newFlashcard) => {
+    // console.log(newFlashcard);
+    props.onAddNew(newFlashcard);
+  };
   return (
     <Grid className='c-flashcards' container>
-      {cardData.map((card) => {
+      {props.cardData.map((card) => {
         return <Flashcard card={card} key={card._id} item />;
       })}
-      <Flashcard card={''} className='c-add-new' />
+      <Flashcard
+        card={''}
+        className='c-add-new'
+        onNewFlashcard={newFlashcard}
+      />
     </Grid>
   );
 };
