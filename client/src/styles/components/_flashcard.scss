@@ -1,7 +1,8 @@
 .c-flashcard {
   //   background-color: black;
-  height: 250px;
+  // height: 250px;
   transition: all 1s ease-in-out;
+  // background-color: black;
   font-family: 'Poppins', sans-serif;
 
   &__front,
@@ -13,10 +14,11 @@
     border: 1px solid #a0a4b8;
     color: #0089e4;
 
-    -webkit-box-shadow: inset 0px 0px 5px 0.2px #002c49;
-    box-shadow: inset 0px 0px 5px 0.2px #002c49;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     transition: all 0.1s ease-in-out;
+    &.hidden {
+      display: none;
+    }
   }
 
   &__front {
@@ -24,7 +26,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     gap: 1rem;
-    // align-items: flex-end;
+
     &__question {
       font-size: 1.5em;
       //   inline-size: 230px;
@@ -65,15 +67,46 @@
       //   inline-size: 230px;
       overflow-wrap: break-word;
     }
-    &__btn {
-      justify-self: flex-end;
-      align-self: flex-start;
-      margin: 0.5rem;
-      cursor: pointer;
-      display: inline-block;
-      border: none;
-      background: none;
-      color: rgb(82, 82, 82);
+
+    &__options {
+      &__back-btn {
+        // justify-self: flex-end;
+        // align-self: flex-start;
+        margin: 0.5rem;
+        cursor: pointer;
+        display: inline-block;
+        border: none;
+        background: none;
+        color: rgb(82, 82, 82);
+      }
+      &__delete-btn {
+        // justify-self: flex-end;
+        // align-self: flex-start;
+        margin: 0.5rem;
+        cursor: pointer;
+        display: inline-block;
+        border: none;
+        background: none;
+        color: rgb(82, 82, 82);
+      }
+    }
+  }
+  &__add-new {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #dce1e9;
+    border: 1px solid #a0a4b8;
+    color: #0089e4;
+    height: 100px;
+    width: 100px;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    transition: all 0.1s ease-in-out;
+    &:hover {
+      background-color: rgb(185, 227, 255);
     }
   }
 }

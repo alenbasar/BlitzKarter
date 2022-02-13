@@ -1,24 +1,28 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactCardFlip from 'react-card-flip';
+import axios from 'axios';
+import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Flashcard = ({ card }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [height, setHeight] = useState('initial');
+  const [animateExit, setAnimateExit] = useState(false);
 
-  const frontEl = useRef();
-  const backEl = useRef();
+  // const frontEl = useRef();
+  // const backEl = useRef();
 
-  function setMaxHeight() {
-    const frontHeight = frontEl.current.getBoundingClientRect().height;
-    const backHeight = backEl.current.getBoundingClientRect().height;
-    setHeight(Math.max(frontHeight, backHeight, 100));
-  }
+  // function setMaxHeight() {
+  //   const frontHeight = frontEl.current.getBoundingClientRect().height;
+  //   const backHeight = backEl.current.getBoundingClientRect().height;
+  //   setHeight(Math.max(frontHeight, backHeight, 100));
+  // }
 
-  useEffect(setMaxHeight, [card.question, card.answer, card.options]);
-  useEffect(() => {
-    window.addEventListener('resize', setMaxHeight);
-    return () => window.removeEventListener('resize', setMaxHeight);
-  }, []);
+  // useEffect(setMaxHeight, [card.question, card.answer, card.options]);
+  // useEffect(() => {
+  //   window.addEventListener('resize', setMaxHeight);
+  //   return () => window.removeEventListener('resize', setMaxHeight);
+  // }, []);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -33,12 +37,27 @@ const Flashcard = ({ card }) => {
   const handleBackClick = (e) => {
     setIsFlipped(false);
   };
+  const handleDeleteClick = async (e) => {
+    console.log(e.target.value);
+    setAnimateExit(true);
+    try {
+      await axios.delete(`http://localhost:8000/cards/${e.target.value}`, {
+        params: e.target.value,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className='c-flashcard'>
-      {
+      {card !== '' ? (
         <ReactCardFlip isFlipped={isFlipped}>
-          <div className='c-flashcard__front' ref={frontEl}>
+          <div
+            className={`c-flashcard__front animate__animated ${
+              animateExit ? 'hidden' : ''
+            }`}
+          >
             <h1 className='c-flashcard__front__question'>{card.question}</h1>
             <ul className='c-flashcard__front__options'>
               {card.options.map((option, index) => (
@@ -55,17 +74,34 @@ const Flashcard = ({ card }) => {
             </ul>
           </div>
 
-          <div className='c-flashcard__back' ref={backEl}>
+          <div
+            className={`c-flashcard__back animate__animated ${
+              animateExit ? 'hidden' : ''
+            }`}
+          >
             <h1 className='c-flashcard__back__answer'>{card.answer}</h1>
-            <button
-              className='c-flashcard__back__btn'
-              onClick={handleBackClick}
-            >
-              Back
-            </button>
+            <div className='c-flashcard__back__options'>
+              <button
+                className='c-flashcard__back__options__back-btn'
+                onClick={handleBackClick}
+              >
+                Back
+              </button>
+              <button
+                className='c-flashcard__back__options__delete-btn'
+                onClick={handleDeleteClick}
+                value={card._id}
+              >
+                Delete
+              </button>
+            </div>
           </div>
         </ReactCardFlip>
-      }
+      ) : (
+        <div className='c-flashcard__add-new'>
+          <AddCircleOutlineRoundedIcon />
+        </div>
+      )}
     </div>
   );
 };

@@ -2,6 +2,11 @@
 @import './reset';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
 
+// React Grid Layout
+
+@import '/node_modules/react-grid-layout/css/styles.css';
+@import '/node_modules/react-resizable/css/styles.css';
+
 @import 'animate.css';
 // App
 @import './app';

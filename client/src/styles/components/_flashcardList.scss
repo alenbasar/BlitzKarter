@@ -1,16 +1,15 @@
 .c-flashcards {
-  display: grid;
   padding: 1rem;
-  // border: 1px solid black;
+  // // border: 1px solid black;
   justify-content: center;
-  align-items: center;
-  // align-content: flex-start;
-  // flex-wrap: wrap;
-  // padding: 1rem;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  // align-items: center;
+  // align-content: center;
+  // // flex-wrap: wrap;
+  // // padding: 1rem;
   // gap: 1rem;
-  width: 100%;
+  // grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  // width: 100%;
   // background-color: #d8ddef;
   overflow-y: scroll;
   &::-webkit-scrollbar {

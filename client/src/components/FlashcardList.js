@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Flashcard from './Flashcard';
+import Grid from '@mui/material/Grid';
 
 const FlashcardList = ({ cardData }) => {
   return (
-    <div className='c-flashcards'>
+    <Grid className='c-flashcards' container>
       {cardData.map((card) => {
-        return <Flashcard card={card} key={card._id} />;
+        return <Flashcard card={card} key={card._id} item />;
       })}
-    </div>
+      <Flashcard card={''} className='c-add-new' />
+    </Grid>
   );
 };
 
