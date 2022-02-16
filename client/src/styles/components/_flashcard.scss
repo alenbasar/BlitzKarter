@@ -1,8 +1,5 @@
 .c-flashcard {
-  //   background-color: black;
-  // height: 250px;
   transition: all 1s ease-in-out;
-  // background-color: black;
   font-family: 'Poppins', sans-serif;
 
   &__front,
@@ -13,7 +10,7 @@
     background-color: #dce1e9;
     border: 1px solid #a0a4b8;
     color: #0089e4;
-
+    max-width: 500px;
     border-radius: 0.5rem;
     transition: all 0.1s ease-in-out;
     &.hidden {
@@ -29,12 +26,10 @@
 
     &__question {
       font-size: 1.5em;
-      //   inline-size: 230px;
       overflow-wrap: break-word;
     }
 
     &__options {
-      //   align-self: center;
       display: flex;
       flex-direction: column;
 

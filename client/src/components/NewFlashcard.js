@@ -5,10 +5,16 @@ const NewFlashcard = (props) => {
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
   const [options, setOptions] = useState('');
+  const [falseForm, setFalseForm] = useState(false);
   const [isPosted, setIsPosted] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (question === '' || answer === '' || options === '') {
+      setFalseForm(true);
+      return;
+    }
 
     const optionsArray = options.split(',').filter((o) => {
       return o != ' ';
@@ -35,8 +41,13 @@ const NewFlashcard = (props) => {
   };
 
   return (
-    <div className='c-new-flashcard'>
+    <div
+      className={`c-new-flashcard animate__animated animate__bounceIn ${
+        falseForm ? 'false' : ''
+      }`}
+    >
       <form method='post' onSubmit={handleSubmit}>
+        <span>Make sure every input is filled</span>
         <input
           type='text'
           placeholder='Question'
@@ -56,6 +67,8 @@ const NewFlashcard = (props) => {
         <textarea
           placeholder='Options (separate with ",")'
           value={options}
+          // cols='20'
+          rows='10'
           onChange={(e) => {
             setOptions(e.target.value);
           }}

@@ -51,18 +51,6 @@ function App(props) {
     <div className='App'>
       <header className='c-header'>
         <h1 className='c-header__logo'>BlitzKarter</h1>
-        {/* <ul className='c-header__nav'>
-          <li>
-            <button
-              className='c-header__nav__btn'
-              onClick={() => {
-                setNewCardAnimate(!newCardAnimate);
-              }}
-            >
-              {newCardAnimate ? 'My Cards' : 'Create New'}
-            </button>
-          </li>
-        </ul> */}
       </header>
       <section className='c-body'>
         {newFlashcard ? (

@@ -1,29 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
 import axios from 'axios';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
-import { motion, AnimatePresence } from 'framer-motion';
 
 const Flashcard = (props) => {
   const [isFlipped, setIsFlipped] = useState(false);
-  const [height, setHeight] = useState('initial');
   const [animateExit, setAnimateExit] = useState(false);
   const [addNew, setAddNew] = useState(true);
-
-  // const frontEl = useRef();
-  // const backEl = useRef();
-
-  // function setMaxHeight() {
-  //   const frontHeight = frontEl.current.getBoundingClientRect().height;
-  //   const backHeight = backEl.current.getBoundingClientRect().height;
-  //   setHeight(Math.max(frontHeight, backHeight, 100));
-  // }
-
-  // useEffect(setMaxHeight, [card.question, card.answer, card.options]);
-  // useEffect(() => {
-  //   window.addEventListener('resize', setMaxHeight);
-  //   return () => window.removeEventListener('resize', setMaxHeight);
-  // }, []);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -49,10 +32,6 @@ const Flashcard = (props) => {
       console.log(error);
     }
   };
-
-  // useEffect(() => {
-  //   setAddNew(false);
-  // }, []);
 
   return (
     <div className='c-flashcard'>

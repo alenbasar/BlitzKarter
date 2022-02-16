@@ -1,0 +1,64 @@
+.c-new-flashcard {
+  //   background-color: rgb(129, 129, 129);
+  width: 100%;
+  //   ;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  align-items: center;
+  span {
+    visibility: hidden;
+  }
+
+  &.false {
+    span {
+      visibility: visible;
+      color: red;
+    }
+    form {
+      input {
+        border-color: red;
+      }
+      textarea {
+        border-color: red;
+      }
+    }
+  }
+  form {
+    width: 50%;
+    height: 50%;
+    padding: 4rem;
+    // border: 1px solid black;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    justify-content: space-around;
+    input {
+      border: 3px solid #66c3ff;
+      border-radius: 0.25rem;
+      text-align: center;
+      outline: none;
+      &:focus {
+        border: 4px solid #66c3ff;
+      }
+    }
+
+    textarea {
+      border: 3px solid #66c3ff;
+      border-radius: 0.25rem;
+      resize: none;
+      outline: none;
+      text-align: center;
+      &:focus {
+        border: 4px solid #66c3ff;
+      }
+    }
+
+    button {
+      border: 3px solid #66c3ff;
+      border-radius: 0.25rem;
+      padding: 2rem;
+    }
+  }
+}

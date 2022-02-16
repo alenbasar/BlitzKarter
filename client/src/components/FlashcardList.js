@@ -4,7 +4,6 @@ import Grid from '@mui/material/Grid';
 
 const FlashcardList = (props) => {
   const newFlashcard = (newFlashcard) => {
-    // console.log(newFlashcard);
     props.onAddNew(newFlashcard);
   };
   return (
